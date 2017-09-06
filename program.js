@@ -1,32 +1,25 @@
 // task 1.3
 
-process.stdin.setEncoding('utf-8');        //  ustawienie enkodowania na string
-
+process.stdin.setEncoding('utf-8');                    //  ustawienie enkodowania na string
 process.stdin.on('readable', function() {
-                                           // metoda .read() ma za zadanie odczytać co użytkownik podał na wejściu
-    var input = process.stdin.read();
-    if(input !== null) {                   // jesli cokolwiek wpisane to wyswietla..
-
+    var input = process.stdin.read();                  // metoda .read() ma za zadanie odczytać co użytkownik podał na wejściu
+    if(input !== null) {                               // jesli cokolwiek wpisane to wyswietla..
         var instruction = input.toString().trim();
-        
+        var version = process.versions.node;           //przechowuje informacje na temat Node oraz komponentów   
+        var system = process.env.os;                   //srodowisko dzialania Node
         switch (instruction) {
-            
-        case '/exit':	
+        case '/exit':   
             process.stdout.write('Quitting app!\n');
             process.exit();
             break;
-        
         case '/ver':
-			console.log('Node version: ',process.versions.node);
+            process.stdout.write('Version: '+ version +'\n');
             break;
-		
-		case '/system':
-			console.log('System: ',process.env.os);
+        case '/system':
+            process.stdout.write('System: '+ system +'\n');
             break;
-        
         default: 
             process.stderr.write('Wrong instruction!\n');
-                                          
-    	}
-	}
+        }                 
+    }
 });
